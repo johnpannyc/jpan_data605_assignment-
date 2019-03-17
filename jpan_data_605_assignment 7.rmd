@@ -1,0 +1,121 @@
+---
+title: "DATA 605 Assginment 7"
+author: "Jun Pan"
+date: "March 17, 2019"
+output: html_document
+---
+
+
+```{r}
+library(knitr)
+```
+
+
+1.  Let X1, X2, . . . , Xn be n mutually independent random variables, each of which is uniformly distributed on the integers from 1 to k. Let Y denote the minimum of the Xi's. Find the distribution of Y . 
+
+
+$k^n$ = total number of options to assign the values to Xi
+
+$(k???1)^n$  will represent the combinations where none of the Xi are equal to 1.
+
+so: 
+$P(X=1) = (k^n ??? (k ??? 1)^n)/k^n$
+
+$P(x=2) = ((k ??? 2+ 1)^n ??? (k ??? 2)^n)/kn$
+
+$P(X=3)  = ((k ??? 3 +1 )^n ??? (k ??? 3)^n)/k^n)$
+
+```````````````
+Therefore, the probability distribution of  can be represented as:
+$P(X=m) = ((k???m+1)^n???(k???m)^n)/k^n$
+
+
+
+
+
+
+2.  Your organization owns a copier (future lawyers, etc.) or MRI (future doctors).  This machine has a manufacturer's expected lifetime of 10 years.  This means that we expect one failure every ten years.  (Include the probability statements and R Code for each part.). 
+
+a.  What is the probability that the machine will fail after 8 years?.  Provide also the expected value and standard deviation.  Model as a geometric.  (Hint: the probability is equivalent to not failing during the first 8 years..) 
+
+
+```{r}
+p = 1/10
+q = 1-p
+n <- 8
+round(pgeom(8,p,lower.tail = F), 3)
+```
+The probability that the machine will fail after 8 years is 0.387.
+
+Expected value: 1/p = 1/0.1 = 10 years(agrees with exepcted value in the problem description)
+```{r}
+#standard deviation
+sqrt(q/p^2)
+```
+
+
+
+b.  What is the probability that the machine will fail after 8 years?.  Provide also the expected value and standard deviation.  Model as an exponential.   
+
+```{r}
+lambda <- 1/10
+k = 8
+exp(-lambda*k)
+```
+Probability is 0.449.
+
+```{r}
+1/lambda#expected value
+```
+
+```{r}
+sqrt(1/lambda^2)#standard deviation
+```
+
+
+
+c.  What is the probability that the machine will fail after 8 years?.  Provide also the expected value and standard deviation.  Model as a binomial.  (Hint:  0 success in 8 years)   
+
+```{r}
+#probabiliy of fail after yr8
+n <- 8
+p <- 1/10
+q <- 1-p
+k <- 0
+
+dbinom(k, n, p)
+```
+
+```{r}
+#expected value
+n*p
+```
+
+```{r}
+#standard deviaion
+sqrt(n*p*q)
+```
+
+
+
+d.  What is the probability that the machine will fail after 8 years?.  Provide also the expected value and standard deviation.  Model as a Poisson.   
+ 
+```{r}
+#probability
+lambda <- 8/10
+ppois(0, lambda = 0.8)
+```
+ 
+Expected value 0.8
+
+```{r}
+#standard deviation
+sqrt(0.8)
+```
+
+ 
+ 
+
+
+
+
